@@ -1,5 +1,5 @@
 Virtual Keyboard
-
+https://kateprotasevich.github.io/virtual-keyboard/
 Done:
 1. Есть поле ввода и клавиатура с 65 кнопками. Нажатие на буквы и символы выводит их в поле ввода.
 2. Кнопка Escape очищает поле ввода.
