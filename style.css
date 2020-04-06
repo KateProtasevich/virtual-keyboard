@@ -27,7 +27,10 @@ textarea {
     margin: 0 auto;
     resize: none;
     border-radius: 10px;
-    
+    tab-size: 4;
+    -o-tab-size: 4;
+    -moz-tab-size: 4;
+    font-size: 14px;
 }
 
 .keyboard {
@@ -35,7 +38,7 @@ textarea {
     position: relative;
     margin: 0 auto;
     padding: 5px;
-    background-color: grey;
+    background-color: rgb(89, 76, 76);
     border-radius: 10px;
 }
 p {
@@ -43,9 +46,12 @@ p {
     font-size: 16px;
 }
 .lang-value {
+    display: inline-block;
     border: 1px solid grey;
     border-radius: 4px;
     padding: 4px;
+    width: 45px;
+    text-align: center;
     background-color: lightslategrey;
     margin-right: 10px;
     font-size: 18px;
@@ -58,9 +64,9 @@ p {
     background-color: maroon;
     font-size: 16px;
     outline: none;
-    border-color: transparent;
+    /*border-color: transparent;
     border: 5px solid transparent;
-    outline-color: transparent;
+    outline-color: transparent;*/
     font-size: 20px;
     border-radius: 10px;
     
@@ -71,10 +77,12 @@ p {
     margin: 5px;
     background-color: rgb(54, 3, 3);
     font-size: 16px;
-    border-color: transparent;
+    border-color: silver;
+    /*border-color: transparent;
     outline-color: transparent;
-    border: 5px solid transparent;
+    border: 5px solid transparent;*/
     border-radius: 10px;
+    color: silver;
 }
 
 button:hover {
@@ -83,10 +91,11 @@ button:hover {
     transition: border-radius 3.3s linear;*/
     /*background-color: rgb(248, 116, 116);*/
     /*border-radius: 30%;*/
-    border-color: transparent;
+    /*border-color: transparent;
     outline-color: transparent;
-    border: 5px solid transparent;
+    border: 5px solid transparent;*/
     /*background: radial-gradient(rgb(83, 13, 13),rgb(80, 11, 80));*/
+    color: black;
 }
 
 
@@ -94,24 +103,29 @@ button:hover {
     background-color: cyan;
     
 }
+button:active {
+    border: 2px solid rgb(72, 23, 23);
+    
+    
+}
 
   
   @keyframes bgcolor {
-    15% {
+0% {
       
-        background: radial-gradient(rgb(83, 13, 13),rgb(80, 11, 80));
+        background: radial-gradient(rgb(222, 108, 108),rgb(83, 13, 13));
         
         
     }
     
     50% {
-        background: radial-gradient(rgb(80, 11, 80),rgb(137, 16, 153));
+        background: radial-gradient(rgb(251, 174, 174),rgb(68, 11, 11));
         
         
     }
     
     100% {
-        background: radial-gradient(rgb(137, 16, 153),rgb(68, 13, 119));
+        background: radial-gradient(rgb(247, 151, 151),rgb(119, 20, 20));
         
         
     }
@@ -119,7 +133,7 @@ button:hover {
   
   button:hover {
     
-    animation: bgcolor 0.6s ease;
+    animation: bgcolor 0.7s ease;
     animation-iteration-count: infinite;
      
      
@@ -132,8 +146,8 @@ button:hover {
       border: 1px solid honeydew;
       background-color: rgb(27, 27, 27);
       border-radius: 50%;
-      top: 150px;
-      left: 90px;
+      top: 167px;
+      left: 115px;
   }
   .cals-lock_green {
       background-color: lawngreen;

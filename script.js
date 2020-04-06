@@ -29,7 +29,7 @@ langHint.append(langHintValue);
 langHint.append('Для смены языка нажмите CTRL + ALT');
 langHintValue.innerHTML = lang;
 wrapper.append(keyboard);
-
+inputText.focus();
 
 
 
@@ -38,7 +38,7 @@ wrapper.append(keyboard);
 
 /////Array values///////
 let symbolButtonValues = [['Backquote',1, ['`','~'],'ё'],['Digit1',2,['1','!'],['1','!']],['Digit2',3,['2','@'],['2','"']],['Digit3',4,['3','#'],['3','№']],['Digit4',5,['4','$'],['4',';']],['Digit5',6,['5','%'],['5','%']],['Digit6',7,['6','^'],['6',':']],['Digit7',8,['7','&'],['7','?']],['Digit8',9,['8','*'],['8','*']],['Digit9',10,['9','('],['9','(']],['Digit0',11,['0',')'],['0',')']],['Minus',12,['-','_'],['-','_']],['Equal',13,['=','+'],['=','+']],['KeyQ',16,'q','й'],['KeyW',17,'w','ц'],['KeyE',18,'e','у'],['KeyR',19,'r','к'],['KeyT',20,'t','е'],['KeyY',21,'y','н'],['KeyU',22,'u','г'],['KeyI',23,'i','ш'],['KeyO',24,'o','щ'],['KeyP',25,'p','з'],['BracketLeft',26,['[','{'],'х'],['BracketRight',27,[']','}'],'ъ'],['Backslash',28,['\\','|'],['\\','/']],['KeyA',31, 'a','ф'],['KeyS',32,'s','ы'],['KeyD',33,'d','в'],['KeyF',34,'f','а'],['KeyG',35,'g','п'],['KeyH',36,'h','р'],['KeyJ',37,'j','о'],['KeyK',38,'k','л'],['KeyL',39,'l','д'],['Semicolon',40,[';',':'],'ж'],['Quote',41,["'",'"'],'э'],['IntlBackslash',44,['\\','|'],['\\','/']],['KeyZ',45,'z','я'],['KeyX',46,'x','ч'],['KeyC',47,'c','с'],['KeyV',48,'v','м'],['KeyB',49,'b','и'],['KeyN',50,'n','т'],['KeyM',51,'m','ь'],['Comma',52,[',','<'],'б'],['Period',53,['.','>'],'ю'],['Slash',54,['/','?'],['.',',']]];
-let specialButtonValues = [['Escape',0,'ESC',clearFunc,'50px'],['Delete',29, 'DEL',deleteFunc,'95px'],['Tab',15,"TAB",tabFunc,'95px'],['Backspace',14,"BACKSPACE",deleteFunc,'140px'],['CapsLock',30,"CAPS LOCK",capsLockFunc,'120px'],['Enter',42,"ENTER",enterFunc,'190px'],['ArrowUp',55,"&#8593",deleteFunc],['OSLeft',58,'WIN',deleteFunc],['Space',60,'&#160',spaceFunc,'400px'],['ArrowLeft',63,'&#8592',deleteFunc],['ArrowDown',64,'&#8595',deleteFunc],['ArrowRight',65,'&#8594',deleteFunc],['MyHelp',66,'HELP',deleteFunc]];
+let specialButtonValues = [['Escape',0,'ESC',clearFunc,'50px'],['Delete',29, 'DEL',deleteFunc,'95px'],['Tab',15,"TAB",tabFunc,'95px'],['Backspace',14,"BACKSPACE",backFunc,'140px'],['CapsLock',30,"CAPS LOCK",capsLockFunc,'120px'],['Enter',42,"ENTER",enterFunc,'190px'],['ArrowUp',55,"&#8593",arrowUpFunc],['OSLeft',58,'WIN',deleteFunc],['Space',60,'&#160',spaceFunc,'400px'],['ArrowLeft',63,'&#8592',arrowLeftFunc],['ArrowDown',64,'&#8595',arrowDownFunc],['ArrowRight',65,'&#8594',arrowRightFunc]];
 let altShiftCtrlValues = [['ShiftLeft',43,"SHIFT",shiftFunc,unShiftFunc,'140px'],['ShiftRight',56,'SHIFT',shiftFunc,unShiftFunc,'110px'],['ControlLeft',57,'CTRL',ctrlFunc,unCtrlFunc,'90px'],['AltLeft',59,'ALT',altFunc,unAltFunc],['AltRight',61,'ALT',altFunc,unAltFunc],['ControlRight',62,'CTRL',ctrlFunc,unCtrlFunc]];
 
 ///////////////////////
@@ -52,13 +52,36 @@ let isCaps = false;
 let сapsCounter = 0;
 let buttonArray =[];
 let symbolButtonArray =[];
+
+
 function clearFunc() {
-    inputText.innerText = '';
+    inputText.setRangeText('',0,inputText.selectionEnd+1, 'end' );
+    //inputText.innerText = '';
 }
+
+
 function deleteFunc() {
-    //alert('Здесь должна быть функция');
-    console.log(isCaps);
+    
+if (inputText.selectionStart != inputText.selectionEnd) {
+    inputText.setRangeText('',inputText.selectionStart,inputText.selectionEnd, 'end' );
+} else {
+    inputText.setRangeText('',inputText.selectionStart,inputText.selectionEnd+1, 'end' );
 }
+
+}
+
+function backFunc() {
+    
+    if (inputText.selectionStart != inputText.selectionEnd) {
+        inputText.setRangeText('',inputText.selectionStart,inputText.selectionEnd, 'end' );
+    } else {
+        if (inputText.selectionStart > 0) {
+            inputText.setRangeText('',inputText.selectionStart-1,inputText.selectionEnd, 'end' );  
+        }
+        
+    }
+    
+    }
 function capsLockFunc() {
     сapsCounter++;
     console.log(сapsCounter);
@@ -171,14 +194,43 @@ function changeLang() {
        
 }
 function spaceFunc() {
-    inputText.append(' ');
+    inputText.setRangeText(' ',inputText.selectionStart,inputText.selectionEnd, 'end' );
+    //inputText.append(' ');
     //inputText.focus();
+    console.log(inputText.value.length);
+    
 }
 function enterFunc() {
-    inputText.append('\n');
+    inputText.setRangeText('\n',inputText.selectionStart,inputText.selectionEnd, 'end' );
+    //inputText.append('\n');
+    console.log(inputText.value.length);
 }
 function tabFunc() {
-    inputText.append('\t');
+    inputText.setRangeText('\t',inputText.selectionStart,inputText.selectionEnd, 'end' );
+    //inputText.append('\t');
+    console.log(inputText.value.length);
+}
+function arrowRightFunc() {
+    let start = inputText.selectionStart;
+    let end = inputText.selectionEnd;
+    if (start == end) {
+        inputText.selectionStart = inputText.selectionEnd = start+1;
+    } 
+    console.log('right');
+    
+}
+function arrowLeftFunc() {
+    let start = inputText.selectionStart;
+    let end = inputText.selectionEnd;
+    if ((start == end) & (start != 0)) {
+        inputText.selectionStart = inputText.selectionEnd = start-1;
+    } 
+}
+function arrowDownFunc() {
+    inputText.setRangeText('\u2193',inputText.selectionStart,inputText.selectionEnd, 'end' ); 
+}
+function arrowUpFunc() {
+    inputText.setRangeText('\u2191',inputText.selectionStart,inputText.selectionEnd, 'end' );
 }
 
 //changeLang(symbolButtonArray[1]);
@@ -248,9 +300,10 @@ class SymbolButton extends HTMLButtonElement {
                 
             
             }
-            inputText.append(this.inputValue);  
-            console.log(this.langValue);
-            console.log(this.inputValue);
+            inputText.setRangeText(this.inputValue,inputText.selectionStart,inputText.selectionEnd, 'end' );
+            //inputText.append(this.inputValue);  
+            console.log(inputText.value.length);
+            
             inputText.focus();
         });
         this.addEventListener('mouseup', () => {
@@ -350,8 +403,11 @@ document.addEventListener('keydown', function(event) {
         if (event.code == buttonArray[index].keyCode) {
             buttonArray[index].classList.add('button_push');
             //buttonArray[index].dispatchEvent(event);
-            let myEvent = new Event('mousedown',{bubbles: true});
-            buttonArray[index].dispatchEvent(myEvent); 
+            if ((event.code != 'ArrowRight') & (event.code != 'ArrowLeft') & (event.code != 'ArrowDown') & (event.code != 'ArrowUp') & (event.code != 'ArrowUp') & (event.code != 'ArrowUp') & (event.code != 'Backspace') & (event.code != 'Delete')) {
+              let myEvent = new Event('mousedown',{bubbles: true});
+            buttonArray[index].dispatchEvent(myEvent);   
+            }
+            
         }          
     } 
   });
@@ -360,8 +416,11 @@ document.addEventListener('keydown', function(event) {
     for (let index = 0; index < buttonArray.length; index++) {
         if (event.code == buttonArray[index].keyCode) {
             buttonArray[index].classList.remove('button_push');
-            let myEvent = new Event('mouseup',{bubbles: true});
-            buttonArray[index].dispatchEvent(myEvent); 
+            if ((event.code != 'ArrowRight') & (event.code != 'ArrowLeft') & (event.code != 'Backspace') & (event.code != 'Delete')) {
+                let myEvent = new Event('mouseup',{bubbles: true});
+                buttonArray[index].dispatchEvent(myEvent);  
+            }
+             
         }     
     }
     
