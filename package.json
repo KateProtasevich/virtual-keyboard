@@ -1,0 +1,26 @@
+{
+  "name": "virtual-keyboard",
+  "version": "1.0.0",
+  "description": "vitrual keyboard",
+  "main": "script.js",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-vue": "^6.2.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KateProtasevich/virtual-keyboard.git"
+  },
+  "author": "kate protasevich",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KateProtasevich/virtual-keyboard/issues"
+  },
+  "homepage": "https://github.com/KateProtasevich/virtual-keyboard#readme"
+}
