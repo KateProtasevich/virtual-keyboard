@@ -7,24 +7,26 @@ if (!(localStorage.getItem('lang'))) {
 let lang = localStorage.getItem('lang');
 const body = document.querySelector('body');
 const wrapper = document.createElement('div');
-wrapper.classList.add('wrapper');
-body.prepend(wrapper);
 const inputText = document.createElement('textarea');
 const langHint = document.createElement('p');
 const langHintValue = document.createElement('span');
-langHintValue.classList.add('lang-value');
 const keyboard = document.createElement('div');
-keyboard.classList.add('keyboard');
+const capsLight = document.createElement('span');
+
+wrapper.classList.add('wrapper');
+body.prepend(wrapper);
 wrapper.append(inputText);
 wrapper.append(langHint);
+wrapper.append(keyboard);
+keyboard.append(capsLight);
 langHint.append(langHintValue);
 langHint.append('Для смены языка нажмите CTRL + ALT');
+keyboard.classList.add('keyboard');
+langHintValue.classList.add('lang-value');
 langHintValue.innerHTML = lang;
-wrapper.append(keyboard);
-inputText.focus();
-const capsLight = document.createElement('span');
 capsLight.classList.add('cals-lock');
-keyboard.append(capsLight);
+inputText.focus();
+
 const symbolButtonValues = [['Backquote', 1, ['`', '~'], 'ё'], ['Digit1', 2, ['1', '!'], ['1', '!']], ['Digit2', 3, ['2', '@'], ['2', '"']], ['Digit3', 4, ['3', '#'], ['3', '№']], ['Digit4', 5, ['4', '$'], ['4', ';']], ['Digit5', 6, ['5', '%'], ['5', '%']], ['Digit6', 7, ['6', '^'], ['6', ':']], ['Digit7', 8, ['7', '&'], ['7', '?']], ['Digit8', 9, ['8', '*'], ['8', '*']], ['Digit9', 10, ['9', '('], ['9', '(']], ['Digit0', 11, ['0', ')'], ['0', ')']], ['Minus', 12, ['-', '_'], ['-', '_']], ['Equal', 13, ['=', '+'], ['=', '+']], ['KeyQ', 16, 'q', 'й'], ['KeyW', 17, 'w', 'ц'], ['KeyE', 18, 'e', 'у'], ['KeyR', 19, 'r', 'к'], ['KeyT', 20, 't', 'е'], ['KeyY', 21, 'y', 'н'], ['KeyU', 22, 'u', 'г'], ['KeyI', 23, 'i', 'ш'], ['KeyO', 24, 'o', 'щ'], ['KeyP', 25, 'p', 'з'], ['BracketLeft', 26, ['[', '{'], 'х'], ['BracketRight', 27, [']', '}'], 'ъ'], ['Backslash', 28, ['\\', '|'], ['\\', '/']], ['KeyA', 31, 'a', 'ф'], ['KeyS', 32, 's', 'ы'], ['KeyD', 33, 'd', 'в'], ['KeyF', 34, 'f', 'а'], ['KeyG', 35, 'g', 'п'], ['KeyH', 36, 'h', 'р'], ['KeyJ', 37, 'j', 'о'], ['KeyK', 38, 'k', 'л'], ['KeyL', 39, 'l', 'д'], ['Semicolon', 40, [';', ':'], 'ж'], ['Quote', 41, ["'", '"'], 'э'], ['IntlBackslash', 44, ['\\', '|'], ['\\', '/']], ['KeyZ', 45, 'z', 'я'], ['KeyX', 46, 'x', 'ч'], ['KeyC', 47, 'c', 'с'], ['KeyV', 48, 'v', 'м'], ['KeyB', 49, 'b', 'и'], ['KeyN', 50, 'n', 'т'], ['KeyM', 51, 'm', 'ь'], ['Comma', 52, [',', '<'], 'б'], ['Period', 53, ['.', '>'], 'ю'], ['Slash', 54, ['/', '?'], ['.', ',']]];
 const specialButtonValues = [['Escape', 0, 'ESC', clearFunc, undefinedFunc], ['Delete', 29, 'DEL', deleteFunc, undefinedFunc, '95px'], ['Tab', 15, 'TAB', tabFunc, undefinedFunc, '95px'], ['Backspace', 14, 'BACKSPACE', backFunc, undefinedFunc, '140px'], ['CapsLock', 30, 'CAPS LOCK', capsLockFunc, undefinedFunc, '120px'], ['Enter', 42, 'ENTER', enterFunc, undefinedFunc, '190px'], ['ArrowUp', 55, '&#8593', arrowUpFunc, undefinedFunc], ['OSLeft', 58, 'WIN', winFunc, undefinedFunc], ['Space', 60, '&#160', spaceFunc, undefinedFunc, '400px'], ['ArrowLeft', 63, '&#8592', arrowLeftFunc, undefinedFunc], ['ArrowDown', 64, '&#8595', arrowDownFunc, undefinedFunc], ['ArrowRight', 65, '&#8594', arrowRightFunc, undefinedFunc], ['ShiftLeft', 43, 'SHIFT', shiftFunc, unShiftFunc, '140px'], ['ShiftRight', 56, 'SHIFT', shiftFunc, unShiftFunc, '110px'], ['ControlLeft', 57, 'CTRL', ctrlFunc, unCtrlFunc, '90px'], ['AltLeft', 59, 'ALT', altFunc, unAltFunc], ['AltRight', 61, 'ALT', altFunc, unAltFunc], ['ControlRight', 62, 'CTRL', ctrlFunc, unCtrlFunc]];
 let iButton;
@@ -35,6 +37,7 @@ let isCaps = false;
 let сapsCounter = 0;
 let buttonArray = [];
 let symbolButtonArray = [];
+
 inputText.addEventListener('keypress', (event) => {
   event.preventDefault();
 });
